@@ -24,7 +24,19 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
+  <body onload="loadInititalData()">
+    <!-- Button on mobile screen -->
+    <div class="add__new__btn__mobile__only">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        data-bs-toggle="modal"
+        data-bs-target="#addNewModal"
+      >
+        <i class="fa-solid fa-plus"></i> Add New Item
+      </button>
+    </div>
+
     <!-- Add New Modal -->
     <div
       class="modal fade"
@@ -44,7 +56,108 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="imageUrl" class="form-label">Image URL:</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="imageUrl"
+                  aria-describedby="imageUrlHelp"
+                  placeholder="Please add your image link here.."
+                />
+                <div id="imageUrlHelp" class="form-text">
+                  Its an optional field
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="taskTitle" class="form-label">Task Title:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="taskTitle"
+                  placeholder="Please add your task title here.."
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="tags" class="form-label">Task Type:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tags"
+                  placeholder="Please add your task type here.."
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="taskDescription" class="form-label"
+                  >Task Description:</label
+                >
+                <textarea
+                  type="text"
+                  id="taskDescription"
+                  class="form-control"
+                  placeholder="Please add your task description here.."
+                  required
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onclick="handleSubmit()"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button trigger modal for show task -->
+    <!-- <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#showTask"
+    >
+      Launch demo modal
+    </button> -->
+
+    <!-- Open Task Modal -->
+    <div
+      class="modal fade"
+      id="showTask"
+      tabindex="-1"
+      aria-labelledby="showTaskLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="showTaskLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body task__modal__body"></div>
           <div class="modal-footer">
             <button
               type="button"
@@ -104,6 +217,7 @@
                 placeholder="Searct tasks..."
                 aria-label="Username"
                 aria-describedby="basic-addon1"
+                oninput="searchTask.apply(this, arguments)"
               />
               <span class="input-group-text" id="basic-addon1"
                 ><i class="fa-solid fa-magnifying-glass"></i
@@ -114,9 +228,7 @@
       </section>
 
       <section class="mt-4">
-        <div class="row task__contents">
-          <h6>Lorem ipsum dolor sit amet consectetur.</h6>
-        </div>
+        <div class="row task__contents"></div>
       </section>
     </div>
 
@@ -129,5 +241,50 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <!-- <div class="col-md-6 col-lg-4 mt-3" id="${id}" key="${id}">
+      <div class="card shadow-sm task__card">
+        <div class="card-header d-flex justify-content-end task__card__header">
+          <button
+            type="button"
+            class="btn btn-outline-primary mr-2"
+            name="${id}"
+          >
+            <i class="fas fa-pencil-alt" name="${id}"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger mr-2"
+            name="${id}"
+          >
+            <i class="fas fa-trash-alt" name="${id}"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          ${ url && `<img
+            width="100%"
+            src="${url}"
+            alt="card image top"
+            class="card-img-top md-3 rounded-lg"
+          />` }
+          <h4 class="card-title task__card__title">${title}</h4>
+          <p class="description card-text trim-3-lines text-muted">
+            ${description}
+          </p>
+          <div class="tags text-white d-flex flex-wrap">
+            <span class="badge bg-primary m-1">${type}</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-outline-primary float-right"
+            data-bs-toggle="modal"
+            data-bs-target="#showTask"
+          >
+            Open Task
+          </button>
+        </div>
+      </div>
+    </div> -->
   </body>
 </html>
